@@ -1,14 +1,37 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Card from 'react-bootstrap/Card';
 
-class HornedBeasts extends React.Component {
-    render() {
-        return (
-            <div className="horend-items">
-                <h2>{this.props.title}</h2>
-                <img src={this.props.image_url} alt={this.props.title} />
-                <p>{this.props.description}</p>
-            </div>
-        )
-    }
+
+class HornedBeast extends React.Component{
+   constructor(props){
+       super(props);
+       this.state={
+           numberOfLikes:0
+       }
+   }
+   increaseNumOfLikes =()=>{
+       this.setState({
+        numberOfLikes : this.state.numberOfLikes +1
+       })
+   }
+   render(){
+       return(
+        <Card style={{ width: '18rem',display: 'inline-flex',flex: 1}}>
+
+        <Card.Img onClick={this.increaseNumOfLikes} variant="top" src={this.props.url} alt={this.props.title} />
+        <Card.Body>
+          <Card.Title>{this.props.title}</Card.Title>
+          <Card.Text>
+       {this.props.pargraph}
+          </Card.Text>
+          <Card.Text>
+              Num of likes : {this.state.numberOfLikes}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+       )
+   }
 }
-export default HornedBeasts;
+
+export default HornedBeast;
