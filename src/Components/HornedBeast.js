@@ -7,26 +7,26 @@ class HornedBeast extends React.Component{
    constructor(props){
        super(props);
        this.state={
-           numberOflikes:0
+           numberOfLikes:0
        }
    }
-   increseNoflikes =()=>{
+   increaseNumOfLikes =()=>{
        this.setState({
-        numberOflikes : this.state.numberOflikes +1
+        numberOfLikes : this.state.numberOfLikes +1
        })
    }
    render(){
        return(
         <Card style={{ width: '18rem',display: 'inline-flex',flex: 1}}>
-            
-        <Card.Img onClick={this.increseNoflikes} variant="top" src={this.props.url} alt={this.props.title} />
+
+        <Card.Img onClick={this.increaseNumOfLikes} variant="top" src={this.props.url} alt={this.props.title} />
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
           <Card.Text>
        {this.props.pargraph}
           </Card.Text>
           <Card.Text>
-              Num of likes : {this.state.numberOflikes}
+              Num of likes : {this.state.numberOfLikes}
           </Card.Text>
         </Card.Body>
       </Card>
