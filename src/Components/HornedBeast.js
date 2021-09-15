@@ -1,37 +1,57 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+class HornedBeast extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      votes: 0
+    }
+  }
+
+  vote = () => {
+    this.setState({
+      votes: this.state.votes + 1
+    })
+  }
+
+  showModal = () => {
+    this.props.showModal(this.props.beastkey);
+  }
 
 
-class HornedBeast extends React.Component{
-   constructor(props){
-       super(props);
-       this.state={
-           numberOfLikes:0
-       }
-   }
-   increaseNumOfLikes =()=>{
-       this.setState({
-        numberOfLikes : this.state.numberOfLikes +1
-       })
-   }
-   render(){
-       return(
-        <Card style={{ width: '18rem',display: 'inline-flex',flex: 1}}>
+  render() {
 
-        <Card.Img onClick={this.increaseNumOfLikes} variant="top" src={this.props.url} alt={this.props.title} />
-        <Card.Body>
-          <Card.Title>{this.props.title}</Card.Title>
-          <Card.Text>
-       {this.props.pargraph}
-          </Card.Text>
-          <Card.Text>
-              Num of likes : {this.state.numberOfLikes}
-          </Card.Text>
-        </Card.Body>
-      </Card>
-       )
-   }
+    return (
+      <div>
+
+        <Card style={{ width: '18rem' }}>
+          <Card.Img onClick={this.showModal} variant="top" src={this.props.beastImgSrc} alt={this.props.beastImgAlt} title={this.props.beastImgTitale} />
+          <Card.Body>
+            <Card.Title>
+              {this.props.beastName} 
+            </Card.Title>
+            <Card.Text>
+              Discription: {this.props.beastdisc} 
+            </Card.Text>
+            <Card.Text>
+              Key Word: {this.props.beastKeyword} 
+            </Card.Text>
+            <Card.Text>
+              Horns: {this.props.beastHorns} 🦄
+            </Card.Text>
+            <Card.Text>
+              Votes: {this.state.votes} ❤️
+            </Card.Text>
+            <Button onClick={this.vote} variant="primary">vote</Button>
+          </Card.Body>
+        </Card>
+
+      </div>
+    )
+  }
 }
-
 export default HornedBeast;
