@@ -4,8 +4,7 @@ import Main from '../src/Components/Main.js'
 import Footer from '../src/Components/Footer.js'
 import Horned from '../src/Components/Horned.json'
 import SelectedBeast from "./Components/SelectedBeast.js";
-
-
+import MyForm from "./Components/MyForm.js"
 class App extends React.Component {
 
   constructor(props) {
@@ -13,7 +12,8 @@ class App extends React.Component {
 
     this.state = {
       beasts: Horned,
-      clickedBeast: {}
+      clickedBeast: {},
+      horns:'',
     };
   }
   showModal = (key) => {
@@ -29,11 +29,24 @@ class App extends React.Component {
     });
   };
 
+
+ hornFilter = (value) => this.setState({ horns: Number(value)});
+
+  filteredBeasts = () => {
+    let newBeasts = Horned.filter( beast => beast.horns === this.state.horns );
+    this.setState({
+      beasts: newBeasts
+    });
+  }
+  
+
   render() {
     return (
       <div>
         <Header />
-        <SelectedBeast showModal={this.state.showModal} closeModal={this.closeModal} beast={this.state.clickedBeast} />
+        <MyForm hornFilter={this.hornFilter} filteredBeasts={this.filteredBeasts} />
+        <SelectedBeast showModal={this.state.showModal} closeModal={this.closeModal} 
+        beast={this.state.clickedBeast} />
         <Main beastData={this.state.beasts} showModal={this.showModal} />
         <Footer />
       </div>
